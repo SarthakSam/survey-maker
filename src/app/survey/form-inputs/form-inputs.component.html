@@ -1,0 +1,16 @@
+<section>
+  <header>
+    <h5>TOOLBOX</h5>
+  </header>
+  <main>
+    <ul>
+      <li *ngFor = "let input of inputs" (click) = "inputClicked(input)">
+        <div class="row col-12">
+          <i class = "col-4" ><i class="fas fa-text-width"></i></i>
+          <span class = "col-8"> {{ input }} </span>
+        </div>  
+        <hr>
+      </li>
+    </ul>
+  </main>    
+</section>

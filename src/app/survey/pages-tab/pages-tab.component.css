@@ -1,0 +1,36 @@
+header{
+    display: flex;
+    /* border: 1px solid black; */
+    background-color: rgb(169, 223, 220);;
+}
+
+select{
+    height: 35px;
+    width: 140px;
+    margin: auto 5px;
+}
+
+ul{
+    display: flex;
+    margin: 0;
+}
+
+li{
+    list-style: none;
+    height: 40px;
+    /* border: 1px solid black; */
+    margin: 0 5px;
+    border: 1px solid cadetblue;
+    cursor: pointer;
+    color: cadetblue
+}
+
+.list-page{
+    height: 30px;
+    margin: 8px 12px;
+    display: block;
+}
+
+.active-page{
+    background-color: white;
+}

@@ -1,0 +1,22 @@
+<header>
+  <select name="" id="" (change) = "changePage($event)">
+    <option *ngFor = "let page of pagesList" value="{{page}}"> 
+      {{ page }}
+    </option> 
+    <option value="-1"> 
+      Add New Page
+    </option> 
+  </select>
+  <ul>
+    <li *ngFor = " let page of pagesList" [ngClass] = "{ 'active-page': page === 'page1' }">
+      <span class="list-page">
+        {{ page }}
+      </span>
+    </li>
+    <li (click) = "addPage()">
+      <span class="list-page">
+        Add New Page
+      </span>
+    </li>
+  </ul>
+</header>
