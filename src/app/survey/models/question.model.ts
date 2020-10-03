@@ -1,5 +1,5 @@
 
-export class Input{
+export class Question{
     title: string;
     description: string;
     required: boolean;
@@ -7,7 +7,7 @@ export class Input{
     visible: boolean;
     correctAns: any;
     type: string;
-    icon: string;
+    fieldName: string;
 
     constructor(title: string, type: string){
         this.title = title;

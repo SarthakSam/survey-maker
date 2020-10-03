@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Input } from '../models/input.model';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { InputTypesService } from './input-types.service';
+import { FormField } from '../models/form-field.model';
+import { CurrentSelectionService } from '../current-selection.service';
 
 @Component({
   selector: 'app-form-inputs',
@@ -8,15 +10,19 @@ import { Input } from '../models/input.model';
 })
 export class FormInputsComponent implements OnInit {
 
-  inputs = ["textField", "textArea", "checkbox", "dropdown", "radio"]
+  @Output() addField: EventEmitter<FormField> = new EventEmitter<FormField>();
+  formFields: FormField[];
 
-  constructor() { }
+
+  constructor(private inputTypesService: InputTypesService, private currentSelectionService: CurrentSelectionService) { 
+    this.formFields = inputTypesService.getInputTypes();
+  }
 
   ngOnInit() {
   }
 
   inputClicked(event: Event){
-    console.log(event)
+    this.addField.next(event);
   }
 
 }
