@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { InputTypesService } from './input-types.service';
 import { FormField } from '../models/form-field.model';
 import { CurrentSelectionService } from '../current-selection.service';
+import { FormDataService } from '../form-data.service';
 
 @Component({
   selector: 'app-form-inputs',
@@ -10,11 +11,11 @@ import { CurrentSelectionService } from '../current-selection.service';
 })
 export class FormInputsComponent implements OnInit {
 
-  @Output() addField: EventEmitter<FormField> = new EventEmitter<FormField>();
+  // @Output() addField: EventEmitter<FormField> = new EventEmitter<FormField>();
   formFields: FormField[];
 
 
-  constructor(private inputTypesService: InputTypesService, private currentSelectionService: CurrentSelectionService) { 
+  constructor(private inputTypesService: InputTypesService, private formDataService: FormDataService) { 
     this.formFields = inputTypesService.getInputTypes();
   }
 
@@ -22,7 +23,8 @@ export class FormInputsComponent implements OnInit {
   }
 
   inputClicked(event: Event){
-    this.addField.next(event);
+    this.formDataService.addInput(event);
+    // this.addField.next(event);
   }
 
 }

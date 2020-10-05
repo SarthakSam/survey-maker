@@ -4,12 +4,11 @@ import { CurrentSelectionService } from '../current-selection.service';
 import { FormField } from '../models/form-field.model';
 
 @Component({
-  selector: 'app-form-page',
-  templateUrl: './form-page.component.html',
-  styleUrls: ['./form-page.component.css']
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.css']
 })
-export class FormPageComponent implements OnInit {
-  
+export class FormComponent implements OnInit {
   form: FormGroup;
   
   @Input() addedField: FormField;
@@ -27,7 +26,11 @@ export class FormPageComponent implements OnInit {
   }
 
   addField(){
+    console.log(this.addedField)
     // this.form.addControl('', [);
   }
 
+
 }
+  // https://angular.io/guide/dynamic-form
+

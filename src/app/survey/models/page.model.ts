@@ -9,5 +9,6 @@ export class Page{
     constructor(title: string){
         this.title = title;
         this.isVisible = true;
+        this.questions = [];
     }
 }

@@ -6,12 +6,12 @@ export class Question{
     readonly: boolean;
     visible: boolean;
     correctAns: any;
-    type: string;
-    fieldName: string;
+    note: string;
+    key: string;
 
-    constructor(title: string, type: string){
+    constructor(title: string, key: string){
         this.title = title;
         this.visible = true;
-        this.type = type;
+        this.key = key
     }
 }

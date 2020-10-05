@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormDataService } from './form-data.service';
 import { FormField } from './models/form-field.model';
+import { Form } from './models/form.model';
 
 @Component({
   selector: 'app-survey',
@@ -8,9 +10,10 @@ import { FormField } from './models/form-field.model';
 })
 export class SurveyComponent implements OnInit {
   field: FormField; 
-  constructor() { }
+  constructor(private formDataService: FormDataService) { }
 
   ngOnInit() {
+    this.formDataService.setFormData( new Form() );
   }
 
   addField(field){

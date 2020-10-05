@@ -8,7 +8,7 @@ import { SelectionState } from './models/general.model';
 export class CurrentSelectionService {
 
   selectedObj: SelectionState = {
-    pageNo: 1,
+    pageNo: 0,
     questionNo: -1,
     currSelection: "pageNo"
   }
@@ -17,11 +17,11 @@ export class CurrentSelectionService {
 
   constructor() { }
 
-  getProfileObs(): Observable<SelectionState> {
+  getSelectedObj(): Observable<SelectionState> {
     return this.selectedObj$.asObservable();
 }
 
-setProfileObs(newSelection: SelectionState) {
+  setSelectedObj(newSelection: SelectionState) {
     this.selectedObj$.next(newSelection);
-}
+  }
 }
