@@ -7,11 +7,11 @@ import { FormField } from '../models/form-field.model';
 export class InputTypesService {
 
   inputs : FormField[] = [
-    new FormField("textField","fas fa-text-width","" ),
-    new FormField("textArea","fas fa-text-width","" ),
-    new FormField("checkbox","fas fa-text-width","" ),
-    new FormField("dropdown","fas fa-text-width","" ),
-    new FormField("radio","fas fa-text-width","" )
+    new FormField("textField", "Text Field","fas fa-text-width","" ),
+    new FormField("textArea", "Text Area","fas fa-text-width","" ),
+    new FormField("checkbox", "CheckBox","fas fa-text-width","" ),
+    new FormField("dropdown", "Dropdown","fas fa-text-width","" ),
+    new FormField("radio", "Radio","fas fa-text-width","" )
   ]
 
   constructor() { }

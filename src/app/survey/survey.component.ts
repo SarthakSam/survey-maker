@@ -9,15 +9,10 @@ import { Form } from './models/form.model';
   styleUrls: ['./survey.component.css']
 })
 export class SurveyComponent implements OnInit {
-  field: FormField; 
   constructor(private formDataService: FormDataService) { }
 
   ngOnInit() {
     this.formDataService.setFormData( new Form() );
-  }
-
-  addField(field){
-    this.field = field;
   }
 
 }

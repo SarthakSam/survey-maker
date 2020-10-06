@@ -1,35 +1,56 @@
-import { Component, Input, OnInit, SimpleChange } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { CurrentSelectionService } from '../current-selection.service';
-import { FormField } from '../models/form-field.model';
+import { FormDataService } from '../form-data.service';
+import { Form } from '../models/form.model';
+import { SelectionState } from '../models/general.model';
+import { Page } from '../models/page.model';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  
-  @Input() addedField: FormField;
+  page: Page;
+  formObj: Form
+  pageNo: number;
+  subscriptions: Subscription[];
 
-  constructor(private currentSelectionService: CurrentSelectionService) { }
-
-  ngOnChanges(changes: SimpleChange){
-    if(!changes['addedField'].firstChange){
-      this.addField();
-    }
-  }
+  constructor(private currentSelectionService: CurrentSelectionService, private formDataService: FormDataService) {
+    this.subscriptions = [];
+   }
 
   ngOnInit() {
     this.form = new FormGroup({});
+    this.pageNo = 0;
+    this.subscriptions.push( this.formDataService.getFormData().subscribe( (form: Form) => {
+      this.formObj = form;
+      this.fillFormObj(); 
+    }) );
+    this.subscriptions.push( this.currentSelectionService.getSelectedObj().subscribe( (selectionState: SelectionState) => {
+      this.pageNo = selectionState.pageNo;
+      this.fillFormObj();
+    }) );
   }
 
-  addField(){
-    console.log(this.addedField)
-    // this.form.addControl('', [);
+  fillFormObj() {
+    this.page = this.formObj.pages[this.pageNo];
+    let obj = {};
+    this.page.questions.forEach( question => {
+      obj[question.key] = new FormControl("");
+    })
+    this.form = new FormGroup(obj);
+    console.log(this.form, this.page);
   }
 
+  ngOnDestroy(){
+    this.subscriptions.forEach(subscription => {
+      subscription.unsubscribe();
+    });
+  }
 
 }
   // https://angular.io/guide/dynamic-form

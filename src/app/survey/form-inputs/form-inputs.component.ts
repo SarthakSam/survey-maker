@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InputTypesService } from './input-types.service';
 import { FormField } from '../models/form-field.model';
 import { CurrentSelectionService } from '../current-selection.service';
@@ -11,7 +11,6 @@ import { FormDataService } from '../form-data.service';
 })
 export class FormInputsComponent implements OnInit {
 
-  // @Output() addField: EventEmitter<FormField> = new EventEmitter<FormField>();
   formFields: FormField[];
 
 
@@ -22,9 +21,8 @@ export class FormInputsComponent implements OnInit {
   ngOnInit() {
   }
 
-  inputClicked(event: Event){
+  inputClicked(event: FormField){
     this.formDataService.addInput(event);
-    // this.addField.next(event);
   }
 
 }

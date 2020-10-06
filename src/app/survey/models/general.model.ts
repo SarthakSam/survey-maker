@@ -3,3 +3,7 @@ export interface SelectionState{
     questionNo: number;
     currSelection: string;
 }
+
+export class LabelValuePair{
+    constructor(private label: string, private value: string){}
+}

@@ -1,3 +1,11 @@
-<p>
-  form works!
-</p>
+<form [formGroup] = "form">
+  <div *ngFor = "let question of page.questions" class="question-container">
+    <label for="{{ question.key }}">{{ question.title }}</label>
+    <p>{{ question.description}}</p>
+    <input *ngIf = "question.controlType === 'textbox'" type="text" [formControlName] = "question.key">
+    <select *ngIf = "question.controlType === 'dropdown'" [formControlName] = "question.key">
+      <option *ngFor = "let option of question.options" value="option.value">{{ option.label }}</option>
+    </select>
+    <p>{{ question.note }}</p>
+  </div>
+</form>

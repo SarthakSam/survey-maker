@@ -7,7 +7,7 @@
       <li *ngFor = "let field of formFields" (click) = "inputClicked(field)">
         <div class="row col-12">
           <i class = "col-4" ><i class="{{ field.icon }}"></i></i>
-          <span class = "col-8"> {{ field.type }} </span>
+          <span class = "col-8"> {{ field.label }} </span>
         </div>  
         <hr>
       </li>

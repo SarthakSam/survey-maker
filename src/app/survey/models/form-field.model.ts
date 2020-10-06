@@ -1,9 +1,11 @@
 export class FormField{
-    type: string;
+    controlType: string;
+    label: string;
     icon?: string;
     image?: string;
-    constructor(type: string, icon: string, image: string){
-        this.type = type;
+    constructor(controlType: string, label: string, icon: string, image: string){
+        this.controlType = controlType;
+        this.label = label;
         this.icon = icon;
         this.image = image;
     }
