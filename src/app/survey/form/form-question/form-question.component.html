@@ -1,6 +1,6 @@
 <div [formGroup] = "form"  class="form-group">
-    <label [attr.for]="question.key"> <span>{{serialNo + 1}}.</span> {{ question.title }}</label>
-    <p>{{ question.description}}</p>
+    <label *ngIf= "!question.hideInfo" [attr.for]="question.key"> <span>{{serialNo + 1}}.</span> {{ question.title }} <span *ngIf="question.required">*</span></label>
+    <p *ngIf= "!question.hideInfo">{{ question.description}}</p>
     <div [ngSwitch]="question.controlType">
         <input class="form-control"  *ngSwitchCase="'textbox'" type="text" [formControlName] = "question.key">
         <input class="form-control" *ngSwitchCase="'checkbox'" type="checkbox" [formControlName] = "question.key">
@@ -11,7 +11,7 @@
         <select class="form-control" *ngSwitchCase="'dropdown'" [formControlName] = "question.key">
           <option *ngFor = "let option of question.options" value="option.value">{{ option.label }}</option>
         </select>
-        <p>{{ question.note }}</p>
+        <p *ngIf= "!question.hideInfo">{{ question.note }}</p>
     </div>
 </div> 
     

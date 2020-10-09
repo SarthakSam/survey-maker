@@ -35,3 +35,7 @@ form{
 .not-filled{
     color: grey;
 }
+
+.{
+    border: 1px solid grey;
+}

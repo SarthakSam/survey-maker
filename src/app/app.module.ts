@@ -8,6 +8,7 @@ import { FormInputsComponent } from './survey/form-inputs/form-inputs.component'
 import { SurveyComponent } from './survey/survey.component';
 import { FormComponent } from './survey/form/form.component';
 import { FormQuestionComponent } from './survey/form/form-question/form-question.component';
+import { FormEditComponent } from './survey/form-edit/form-edit.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormQuestionComponent } from './survey/form/form-question/form-question
     FormInputsComponent,
     SurveyComponent,
     FormComponent,
-    FormQuestionComponent
+    FormQuestionComponent,
+    FormEditComponent
   ],
   imports: [
     BrowserModule,

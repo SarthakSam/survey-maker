@@ -40,15 +40,15 @@ export class FormDataService {
      const index = this.currentSelectionObj.currSelection !== 'pageNo' ? this.currentSelectionObj.questionNo: this.form.pages[this.currentSelectionObj.pageNo].questions.length;
      let elem;
      switch(input.controlType){
-      case 'textfield': elem = new TextBoxQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues);
+      case 'textfield': elem = new TextBoxQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues, this.form.totalQues);
                         break;
-      case 'dropdown': elem = new DropdownQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues);
+      case 'dropdown': elem = new DropdownQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues, this.form.totalQues);
                         break;
-      case 'checkbox': elem = new CheckboxQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues);
+      case 'checkbox': elem = new CheckboxQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues, this.form.totalQues);
                         break;
-      case 'textarea': elem = new TextareaQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues);
+      case 'textarea': elem = new TextareaQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues, this.form.totalQues);
                         break;
-      case 'radio':    elem = new RadioQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues);
+      case 'radio':    elem = new RadioQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues, this.form.totalQues);
                         break;                        
      }
      if(elem)

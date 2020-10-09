@@ -10,7 +10,7 @@ export class CurrentSelectionService {
   selectedObj: SelectionState = {
     pageNo: 0,
     questionNo: -1,
-    currSelection: "pageNo"
+    currSelection: "page"
   }
 
   selectedObj$: BehaviorSubject<SelectionState> = new BehaviorSubject<SelectionState>(this.selectedObj);
@@ -22,6 +22,8 @@ export class CurrentSelectionService {
 }
 
   setSelectedObj(newSelection: SelectionState) {
+    if(newSelection.currSelection == "page")
+      newSelection.questionNo = -1;
     this.selectedObj$.next(newSelection);
   }
 

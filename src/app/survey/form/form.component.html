@@ -1,11 +1,15 @@
 <form [formGroup] = "form">
-  <h5 class="not-filled">Enter page Title here<i class="fas fa-pencil-alt green"></i></h5>
-  <p class="not-filled">Enter a page Description<i class="fas fa-pencil-alt green"></i></p>
-  <div *ngFor = "let question of page.questions; let i = index" class="question-container">
+  <span class="not-filled" contenteditable="true">Enter page Title here<i class="fas fa-pencil-alt green"></i></span><br>
+  <span class="not-filled" contenteditable="true">Enter a page Description<i class="fas fa-pencil-alt green"></i></span>
+  
+  <div *ngFor = "let question of page.questions; let i = index" 
+      class="question-container" 
+      (click) = "questionChanged(question.index)"
+      [ngClass] = "{'selected-ques': selectedQues == i}">
     <ul class="tool-bar">
-      <li><i class="fas fa-times"></i></li>
-      <li><i class="far fa-eye"></i></li>
-      <li><i class="fas fa-exclamation"></i></li>
+      <li (click) = "deleteQuestion(i)"><i class="fas fa-times"></i></li>
+      <li (click) = "showHideQuestionInfo(i)"><i class="far fa-eye" [ngClass] = "{ 'red': question.hideInfo }"></i></li>
+      <li (click) = "isRequired(i)"><i class="fas fa-exclamation" [ngClass] = "{ 'red': question.required }"></i></li>
       <li><i class="fas fa-copy"></i></li>
       <li><i class="fas fa-pencil-alt"></i>Properties</li>
     </ul>

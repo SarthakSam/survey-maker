@@ -9,10 +9,13 @@ export class Question{
     note?: string;
     key: string;
     placeholder?: string;
+    hideInfo?: boolean;
+    index: number
 
-    constructor(title: string, key: string){
+    constructor(title: string, key: string, index: number){
         this.title = title;
         this.visible = true;
-        this.key = key
+        this.key = key;
+        this.index = index;
     }
 }
