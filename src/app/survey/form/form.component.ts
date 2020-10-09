@@ -43,7 +43,7 @@ export class FormComponent implements OnInit, OnDestroy {
       obj[question.key] = new FormControl("");
     })
     this.form = new FormGroup(obj);
-    console.log(this.form, this.page);
+    console.log(this.formObj);
   }
 
   ngOnDestroy(){

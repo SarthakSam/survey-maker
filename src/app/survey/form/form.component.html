@@ -1,11 +1,14 @@
 <form [formGroup] = "form">
-  <div *ngFor = "let question of page.questions" class="question-container">
-    <label for="{{ question.key }}">{{ question.title }}</label>
-    <p>{{ question.description}}</p>
-    <input *ngIf = "question.controlType === 'textbox'" type="text" [formControlName] = "question.key">
-    <select *ngIf = "question.controlType === 'dropdown'" [formControlName] = "question.key">
-      <option *ngFor = "let option of question.options" value="option.value">{{ option.label }}</option>
-    </select>
-    <p>{{ question.note }}</p>
+  <h5 class="not-filled">Enter page Title here<i class="fas fa-pencil-alt green"></i></h5>
+  <p class="not-filled">Enter a page Description<i class="fas fa-pencil-alt green"></i></p>
+  <div *ngFor = "let question of page.questions; let i = index" class="question-container">
+    <ul class="tool-bar">
+      <li><i class="fas fa-times"></i></li>
+      <li><i class="far fa-eye"></i></li>
+      <li><i class="fas fa-exclamation"></i></li>
+      <li><i class="fas fa-copy"></i></li>
+      <li><i class="fas fa-pencil-alt"></i>Properties</li>
+    </ul>
+    <app-form-question [question] = "question" [form] = "form" [serialNo] = "i"></app-form-question>
   </div>
 </form>

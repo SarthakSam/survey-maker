@@ -12,7 +12,7 @@ export class SurveyComponent implements OnInit {
   constructor(private formDataService: FormDataService) { }
 
   ngOnInit() {
-    this.formDataService.setFormData( new Form() );
+    this.formDataService.setFormData( JSON.parse(localStorage.form) );
   }
 
 }

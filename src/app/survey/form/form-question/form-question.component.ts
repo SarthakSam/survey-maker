@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Question } from '../../models/question.model';
 
 @Component({
   selector: 'app-form-question',
@@ -6,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form-question.component.css']
 })
 export class FormQuestionComponent implements OnInit {
-
+  @Input() question: Question;
+  @Input() form: FormGroup;
+  @Input() serialNo: number;
   constructor() { }
 
   ngOnInit() {

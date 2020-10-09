@@ -1,16 +1,16 @@
 <header>
-  <select name="" id="" (change) = "changePage($event)">
-    <option *ngFor = "let page of pagesList" value="{{page}}"> 
-      {{ page }}
+  <select class="form-group" (change) = "pageSelected($event)" [value] = "currentPage">
+    <option *ngFor = "let page of pagesList; let i = index" [value]="i"> 
+      {{ page.title }}
     </option> 
     <option value="-1"> 
       Add New Page
     </option> 
   </select>
   <ul>
-    <li *ngFor = " let page of pagesList" [ngClass] = "{ 'active-page': page === 'page1' }">
+    <li *ngFor = " let page of pagesList; let i = index" [ngClass] = "{ 'active-page': currentPage === i }" (click) = "changePage(i)">
       <span class="list-page">
-        {{ page }}
+        {{ page.title }}
       </span>
     </li>
     <li (click) = "addPage()">

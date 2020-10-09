@@ -24,4 +24,9 @@ export class CurrentSelectionService {
   setSelectedObj(newSelection: SelectionState) {
     this.selectedObj$.next(newSelection);
   }
+
+  changePage(pageNo: number) {
+    this.selectedObj.pageNo = pageNo;
+    this.setSelectedObj(this.selectedObj);
+  }
 }

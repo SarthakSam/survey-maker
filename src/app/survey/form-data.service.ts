@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Form } from './models/form.model';
 import { FormField } from './models/form-field.model';
 import { CurrentSelectionService } from './current-selection.service';
 import { SelectionState } from './models/general.model';
 import { TextBoxQuestion } from './models/questionTypes/question-textBox';
 import { DropdownQuestion } from './models/questionTypes/question-dropdown';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { TextareaQuestion } from './models/questionTypes/question-textarea';
+import { CheckboxQuestion } from './models/questionTypes/question-checkbox';
+import { RadioQuestion } from './models/questionTypes/question-radio';
+import { Page } from './models/page.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,13 +40,26 @@ export class FormDataService {
      const index = this.currentSelectionObj.currSelection !== 'pageNo' ? this.currentSelectionObj.questionNo: this.form.pages[this.currentSelectionObj.pageNo].questions.length;
      let elem;
      switch(input.controlType){
-      case 'textField': elem = new TextBoxQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues);
+      case 'textfield': elem = new TextBoxQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues);
                         break;
       case 'dropdown': elem = new DropdownQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues);
                         break;
+      case 'checkbox': elem = new CheckboxQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues);
+                        break;
+      case 'textarea': elem = new TextareaQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues);
+                        break;
+      case 'radio':    elem = new RadioQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues);
+                        break;                        
      }
-     this.form.pages[this.currentSelectionObj.pageNo].questions.splice(index, 0, elem);
+     if(elem)
+       this.form.pages[this.currentSelectionObj.pageNo].questions.splice(index, 0, elem);
      this.setFormData(this.form);
+   }
+
+   addPage(){
+     this.form.pages.push( new Page("Page " + (this.form.pages.length + 1) ) );
+     this.setFormData(this.form);
+     this.currentSelectionService.changePage(this.form.pages.length - 1);
    }
 
 

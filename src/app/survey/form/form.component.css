@@ -1,3 +1,37 @@
+form{
+    background-color: white;
+}
+
 .question-container{
-    border: 2px solid red;
+    /* border: 1px solid grey; */
+    margin: 10px;
+    padding: 10px
+}
+
+.question-container:nth-of-type(2){
+    border: 1px solid grey;
+    background-color: #f4f4f4;
+}
+
+.tool-bar{
+    display: flex;
+    list-style: none;
+    justify-content: flex-end
+}
+
+.tool-bar li{
+    padding: 5px 10px;
+    color: #1ab394;
+}
+
+.red{
+    color: red;
+}
+
+.green{
+    color: 1ab394;
+}
+
+.not-filled{
+    color: grey;
 }
