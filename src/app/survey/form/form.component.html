@@ -2,6 +2,7 @@
   <span class="not-filled" contenteditable="true">Enter page Title here<i class="fas fa-pencil-alt green"></i></span><br>
   <span class="not-filled" contenteditable="true">Enter a page Description<i class="fas fa-pencil-alt green"></i></span>
   
+
   <div *ngFor = "let question of page.questions; let i = index" 
       class="question-container" 
       (click) = "questionChanged(question.index)"

@@ -1,0 +1,15 @@
+<div [formGroup]="form" class="editable-input" [ngStyle]="{'font-size.px': fontSize}">
+    <div *ngIf = "!editable"  (click)="editable = true">
+        <span *ngIf = "form.get(controlName).value">
+            {{ form.get(controlName).value }} 
+        </span>
+        <span *ngIf = "!form.get(controlName).value" class="placeholder">
+           {{ placeholder }}
+        </span>
+        <i class="fas fa-pencil-alt"></i> 
+    </div>
+    <input *ngIf = "editable" (blur)="editable = false" 
+    type="text" [formControlName]="controlName" focusWhen #input 
+    (input)="input.style.width = ((input.value.length + 1) * fontSize) + 'px';">
+    <i *ngIf = "editable" class="fas fa-check"></i>
+</div>

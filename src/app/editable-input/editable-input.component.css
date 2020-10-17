@@ -1,0 +1,28 @@
+
+.editable-input{
+    padding: 5px
+}
+
+input, input:focus{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid turquoise;
+    background-color: transparent;
+    display: inline-block;
+    /* min-width: 80px; */
+}
+
+i{
+    color: turquoise;
+}
+ .fa-pencil-alt{
+    display: none;
+}
+
+.editable-input :hover .fa-pencil-alt{
+    display: inline-block;
+}
+
+.placeholder{
+    opacity: 0.5;
+}
