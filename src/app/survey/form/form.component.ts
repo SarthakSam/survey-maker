@@ -6,6 +6,7 @@ import { FormDataService } from '../form-data.service';
 import { Form } from '../models/form.model';
 import { SelectionState } from '../models/general.model';
 import { Page } from '../models/page.model';
+import { Question } from '../models/question.model';
 
 @Component({
   selector: 'app-form',
@@ -29,23 +30,29 @@ export class FormComponent implements OnInit, OnDestroy {
     this.pageNo = 0;
     this.subscriptions.push( this.formDataService.getFormData().subscribe( (form: Form) => {
       this.formObj = form;
-      this.fillFormObj(); 
+      this.createForm(); 
     }) );
     this.subscriptions.push( this.currentSelectionService.getSelectedObj().subscribe( (selectionState: SelectionState) => {
       this.pageNo = selectionState.pageNo;
       this.selectedQues = selectionState.pageNo;
-      this.fillFormObj();
+      this.createForm();
     }) );
   }
 
-  fillFormObj() {
+  createForm() {
+    let formGroupObj = {};
     this.page = this.formObj.pages[this.pageNo];
-    let obj = {};
+    Object.keys(this.page).forEach( key => {
+      formGroupObj[key] = new FormControl(this.page[key]);
+    });
+    let questionsObj = {};
     this.page.questions.forEach( question => {
-      obj[question.key] = new FormControl("");
+      questionsObj[question.key] = new FormControl("");
     })
-    this.form = new FormGroup(obj);
-    console.log(this.formObj);
+    formGroupObj["questions"] = new FormGroup( questionsObj );
+    this.form = new FormGroup( formGroupObj );
+    // console.log(this.formObj, this.form, formGroupObj["questions"]);
+    // console.log(this.form.get('questions'))
   }
 
   deleteQuestion(index: number){
@@ -73,6 +80,12 @@ export class FormComponent implements OnInit, OnDestroy {
     }
   }
 
+  propertyChanged(event, key: string){
+    this.page[key] = event;
+    // this.formObj[key] = event;
+    this.formDataService.setFormData(this.formObj);
+  }
+
   ngOnDestroy(){
     this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();
@@ -80,5 +93,4 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
 }
-  // https://angular.io/guide/dynamic-form
 

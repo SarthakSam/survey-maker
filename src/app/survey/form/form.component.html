@@ -1,19 +1,25 @@
 <form [formGroup] = "form">
-  <span class="not-filled" contenteditable="true">Enter page Title here<i class="fas fa-pencil-alt green"></i></span><br>
-  <span class="not-filled" contenteditable="true">Enter a page Description<i class="fas fa-pencil-alt green"></i></span>
-  
+  <app-editable-input [form] = "form" controlName = "title" 
+  placeholder = "Input page title here" fontSize = "14"
+  (valueChanged) = "propertyChanged($event, 'title')"></app-editable-input>
+  <app-editable-input [form] = "form" controlName = "description" 
+  placeholder = "Input page title here" fontSize = "12"
+  (valueChanged) = "propertyChanged($event, 'description')"></app-editable-input>
 
-  <div *ngFor = "let question of page.questions; let i = index" 
+  <div formGroupName = "questions">
+      <div *ngFor = "let question of page.questions; let i = index" 
       class="question-container" 
       (click) = "questionChanged(question.index)"
       [ngClass] = "{'selected-ques': selectedQues == i}">
-    <ul class="tool-bar">
-      <li (click) = "deleteQuestion(i)"><i class="fas fa-times"></i></li>
-      <li (click) = "showHideQuestionInfo(i)"><i class="far fa-eye" [ngClass] = "{ 'red': question.hideInfo }"></i></li>
-      <li (click) = "isRequired(i)"><i class="fas fa-exclamation" [ngClass] = "{ 'red': question.required }"></i></li>
-      <li><i class="fas fa-copy"></i></li>
-      <li><i class="fas fa-pencil-alt"></i>Properties</li>
-    </ul>
-    <app-form-question [question] = "question" [form] = "form" [serialNo] = "i"></app-form-question>
+        <ul class="tool-bar">
+          <li (click) = "deleteQuestion(i)"><i class="fas fa-times"></i></li>
+          <li (click) = "showHideQuestionInfo(i)"><i class="far fa-eye" [ngClass] = "{ 'red': question.hideInfo }"></i></li>
+          <li (click) = "isRequired(i)"><i class="fas fa-exclamation" [ngClass] = "{ 'red': question.required }"></i></li>
+          <li><i class="fas fa-copy"></i></li>
+          <li><i class="fas fa-pencil-alt"></i>Properties</li>
+        </ul>
+        <app-form-question [question] = "question" [form] = "form.get('questions')" [serialNo] = "i"></app-form-question>
+      </div>
   </div>
+  
 </form>

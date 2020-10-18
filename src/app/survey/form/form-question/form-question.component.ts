@@ -13,6 +13,10 @@ export class FormQuestionComponent implements OnInit {
   @Input() serialNo: number;
   constructor() { }
 
+  ngOnChanges(){
+    console.log(this.form);
+  }
+
   ngOnInit() {
   }
 

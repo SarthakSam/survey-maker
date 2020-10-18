@@ -10,5 +10,7 @@ export class Page{
         this.title = title;
         this.isVisible = true;
         this.questions = [];
+        this.description = null;
+        this.maxTimeToFinish = null;
     }
 }

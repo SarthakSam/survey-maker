@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -10,13 +10,24 @@ export class EditableInputComponent implements OnInit {
   @Input('form') form: FormGroup;
   @Input('controlName') controlName: string;
   @Input(' placeholder') placeholder: string;
+  @Input('fontSize') fontSize: number;
   editable: boolean = false;
-  fontSize = 20;
+  @Output('valueChanged') valueEmit = new EventEmitter<string>();
 
   constructor() { }
 
+  // ngOnChanges(){
+  //   console.log(this.form);
+  //   console.log(this.controlName)
+  // }
+
   ngOnInit() {
     // console.log(this.controlName, this.form.get('name'))
+  }
+
+  onBlur(){
+    this.editable = false;
+    this.valueEmit.emit(this.form.value[this.controlName] );
   }
 
 }
