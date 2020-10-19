@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CurrentSelectionService } from '../current-selection.service';
 import { FormDataService } from '../form-data.service';
@@ -40,19 +40,28 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   createForm() {
-    let formGroupObj = {};
+    let reactiveFormObject = {};
     this.page = this.formObj.pages[this.pageNo];
     Object.keys(this.page).forEach( key => {
-      formGroupObj[key] = new FormControl(this.page[key]);
+      reactiveFormObject[key] = new FormControl(this.page[key]);
     });
-    let questionsObj = {};
-    this.page.questions.forEach( question => {
-      questionsObj[question.key] = new FormControl("");
+
+    reactiveFormObject['questions'] = new FormArray([]);
+    this.page.questions.forEach( (question: Question) => {
+      reactiveFormObject['questions'].push( this.createFormGroup( question) );
     })
-    formGroupObj["questions"] = new FormGroup( questionsObj );
-    this.form = new FormGroup( formGroupObj );
-    // console.log(this.formObj, this.form, formGroupObj["questions"]);
-    // console.log(this.form.get('questions'))
+    this.form = new FormGroup( reactiveFormObject );
+    // console.log(this.form.get('questions').get('0'))
+    // console.log(reactiveFormObject);
+
+  }
+
+  createFormGroup( question: Question ): FormGroup{
+    let obj = {};
+    Object.keys(question).forEach( (key: string) => {
+      obj[key] = new FormControl(question[key]);
+    });
+    return new FormGroup(obj);
   }
 
   deleteQuestion(index: number){
@@ -83,6 +92,10 @@ export class FormComponent implements OnInit, OnDestroy {
   propertyChanged(event, key: string){
     this.page[key] = event;
     // this.formObj[key] = event;
+    this.formDataService.setFormData(this.formObj);
+  }
+
+  saveForm(){
     this.formDataService.setFormData(this.formObj);
   }
 

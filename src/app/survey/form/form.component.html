@@ -6,20 +6,20 @@
   placeholder = "Input page title here" fontSize = "12"
   (valueChanged) = "propertyChanged($event, 'description')"></app-editable-input>
 
-  <div formGroupName = "questions">
+  <!-- <div formGroupName = "questions"> -->
       <div *ngFor = "let question of page.questions; let i = index" 
       class="question-container" 
       (click) = "questionChanged(question.index)"
       [ngClass] = "{'selected-ques': selectedQues == i}">
-        <ul class="tool-bar">
+      <ul class="tool-bar">
           <li (click) = "deleteQuestion(i)"><i class="fas fa-times"></i></li>
           <li (click) = "showHideQuestionInfo(i)"><i class="far fa-eye" [ngClass] = "{ 'red': question.hideInfo }"></i></li>
           <li (click) = "isRequired(i)"><i class="fas fa-exclamation" [ngClass] = "{ 'red': question.required }"></i></li>
           <li><i class="fas fa-copy"></i></li>
           <li><i class="fas fa-pencil-alt"></i>Properties</li>
-        </ul>
-        <app-form-question [question] = "question" [form] = "form.get('questions')" [serialNo] = "i"></app-form-question>
+      </ul>  
+      <app-form-question [question] = "question" [form] ="form.get('questions').get(i + '')" [serialNo] = "i" (saveForm) = "saveForm()"></app-form-question>
       </div>
-  </div>
+  <!-- </div> -->
   
 </form>

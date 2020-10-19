@@ -17,5 +17,12 @@ export class Question{
         this.visible = true;
         this.key = key;
         this.index = index;
+        this.description = null;
+        this.required = false;
+        this.readonly = false;
+        this.correctAns = "";
+        this.note = null;
+        this.placeholder = null;
+        this.hideInfo = false;
     }
 }

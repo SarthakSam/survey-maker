@@ -16,10 +16,10 @@ export class EditableInputComponent implements OnInit {
 
   constructor() { }
 
-  // ngOnChanges(){
-  //   console.log(this.form);
-  //   console.log(this.controlName)
-  // }
+  ngOnChanges(){
+    // console.log(this.controlName);
+    // console.log()
+  }
 
   ngOnInit() {
     // console.log(this.controlName, this.form.get('name'))

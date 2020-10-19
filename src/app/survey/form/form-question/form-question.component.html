@@ -1,19 +1,27 @@
 <div [formGroup] = "form"  class="form-group">
-    <app-editable-input [form] = "form" [controlName] = "question.title" 
-    placeholder = "Input page title here" fontSize = "14"></app-editable-input>
-    <!-- <label *ngIf= "!question.hideInfo" [attr.for]="question.key"> <span>{{serialNo + 1}}.</span> {{ question.title }} <span *ngIf="question.required">*</span></label> -->
-    <!-- <p *ngIf= "!question.hideInfo">{{ question.description}}</p> -->
+   <div class="title-box">
+    <span style="padding-top: 3px;">{{ serialNo }}.</span>
+    <app-editable-input style="width: -webkit-fill-available;" [form] = "form" controlName = "title" 
+    placeholder = "Input Question title here" fontSize = "14" (valueChanged) = "valueChanged($event, 'title')"></app-editable-input>
+   </div> 
+   
+
+    <app-editable-input [form] = "form" controlName = "description" 
+    placeholder = "Input Question Description here" fontSize = "11" (valueChanged) = "valueChanged($event, 'description')"></app-editable-input>
     <div [ngSwitch]="question.controlType">
-        <input class="form-control"  *ngSwitchCase="'textbox'" type="text" [formControlName] = "question.key">
-        <input class="form-control" *ngSwitchCase="'checkbox'" type="checkbox" [formControlName] = "question.key">
-        <textarea class="form-control" *ngSwitchCase="'textarea'" [formControlName] = "question.key" cols="question.cols" rows="question.rows"></textarea>
+        <input class="form-control"  *ngSwitchCase="'textbox'" type="text">
+        <input class="form-control" *ngSwitchCase="'checkbox'" type="checkbox">
+        <textarea class="form-control" *ngSwitchCase="'textarea'" cols="question.cols" rows="question.rows"></textarea>
         <div *ngSwitchCase = "'radio'">
-            <input *ngFor = "let option of question.options" class="form-control" type="radio" [formControlName] = "question.key" [value]="option.value">
+            <input *ngFor = "let option of question.options" class="form-control" type="radio" [value]="option.value">
         </div>
-        <select class="form-control" *ngSwitchCase="'dropdown'" [formControlName] = "question.key">
+        <select class="form-control" *ngSwitchCase="'dropdown'">
           <option *ngFor = "let option of question.options" value="option.value">{{ option.label }}</option>
         </select>
-        <!-- <p *ngIf= "!question.hideInfo">{{ question.note }}</p> -->
+
+        <app-editable-input [form] = "form" controlName = "note" 
+        placeholder = "Any note here" fontSize = "11" (valueChanged) = "valueChanged($event, 'note')"></app-editable-input>    
+
     </div>
 </div> 
     
