@@ -1,3 +1,8 @@
 main{
     background-color: #f4f4f4;
 }
+
+.form-main{
+    border-right: 4px solid lightGrey; 
+    border-left: 4px solid lightGrey; 
+}

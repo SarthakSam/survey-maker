@@ -10,6 +10,7 @@ import { TextareaQuestion } from './models/questionTypes/question-textarea';
 import { CheckboxQuestion } from './models/questionTypes/question-checkbox';
 import { RadioQuestion } from './models/questionTypes/question-radio';
 import { Page } from './models/page.model';
+import { DropDownOption } from './models/dropDownOptions.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,8 @@ export class FormDataService {
   form: Form = null;
   form$: BehaviorSubject<Form> = new BehaviorSubject<Form>(null); 
   currentSelectionObj: SelectionState;
+  formElements: DropDownOption[] = null;
+  formElements$: BehaviorSubject<DropDownOption[]> = new BehaviorSubject<DropDownOption[]>(null);
 
   constructor(private currentSelectionService: CurrentSelectionService) {
     this.currentSelectionService.getSelectedObj().subscribe((obj: SelectionState) => {
@@ -62,5 +65,12 @@ export class FormDataService {
      this.currentSelectionService.changePage(this.form.pages.length - 1);
    }
 
+   getFormElements(): Observable<DropDownOption[]> {
+     return this.formElements$.asObservable();
+   }
+
+   setFormElements(){
+    this.formElements$.next( this.formElements );
+   }
 
 }

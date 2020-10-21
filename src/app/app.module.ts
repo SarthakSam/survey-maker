@@ -8,9 +8,9 @@ import { FormInputsComponent } from './survey/form-inputs/form-inputs.component'
 import { SurveyComponent } from './survey/survey.component';
 import { FormComponent } from './survey/form/form.component';
 import { FormQuestionComponent } from './survey/form/form-question/form-question.component';
-import { FormEditComponent } from './survey/form-edit/form-edit.component';
 import { EditableInputComponent } from './editable-input/editable-input.component';
 import { FocusWhenDirective } from './directives/focusWhen.directive';
+import { FormPropertiesEditComponent } from './survey/form-properties-edit/form-properties-edit.component';
 
 @NgModule({
   declarations: [
@@ -20,9 +20,9 @@ import { FocusWhenDirective } from './directives/focusWhen.directive';
     SurveyComponent,
     FormComponent,
     FormQuestionComponent,
-    FormEditComponent,
     EditableInputComponent,
-    FocusWhenDirective
+    FocusWhenDirective,
+    FormPropertiesEditComponent
   ],
   imports: [
     BrowserModule,
