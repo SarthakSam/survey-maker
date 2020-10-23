@@ -15,8 +15,8 @@ export class Question{
     constructor(title: string, key: string, index: number){
         this.title = title;
         this.visible = true;
-        this.key = key;
-        this.index = index;
+        this.key = key; // used as key value for ans
+        this.index = index; // every element has an index
         this.description = null;
         this.required = false;
         this.readonly = false;

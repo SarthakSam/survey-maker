@@ -11,6 +11,7 @@ import { CheckboxQuestion } from './models/questionTypes/question-checkbox';
 import { RadioQuestion } from './models/questionTypes/question-radio';
 import { Page } from './models/page.model';
 import { DropDownOption } from './models/dropDownOptions.model';
+import { Question } from './models/question.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,8 @@ export class FormDataService {
   form: Form = null;
   form$: BehaviorSubject<Form> = new BehaviorSubject<Form>(null); 
   currentSelectionObj: SelectionState;
-  formElements: DropDownOption[] = null;
-  formElements$: BehaviorSubject<DropDownOption[]> = new BehaviorSubject<DropDownOption[]>(null);
+  // formElements: DropDownOption[] = null;
+  // formElements$: BehaviorSubject<DropDownOption[]> = new BehaviorSubject<DropDownOption[]>(null);
 
   constructor(private currentSelectionService: CurrentSelectionService) {
     this.currentSelectionService.getSelectedObj().subscribe((obj: SelectionState) => {
@@ -38,10 +39,10 @@ export class FormDataService {
      this.form$.next( form );
    }
 
-   addInput(input: FormField){
+   addQuestion(input: FormField){
      this.form.totalQues++;
-     const index = this.currentSelectionObj.currSelection !== 'pageNo' ? this.currentSelectionObj.questionNo: this.form.pages[this.currentSelectionObj.pageNo].questions.length;
-     let elem;
+     const index = this.currentSelectionObj.currSelection !== 'page' ? this.currentSelectionObj.questionIndex + 1: this.form.pages[this.currentSelectionObj.pageNo].questions.length;
+     let elem: Question;
      switch(input.controlType){
       case 'textfield': elem = new TextBoxQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues, this.form.totalQues);
                         break;
@@ -57,6 +58,17 @@ export class FormDataService {
      if(elem)
        this.form.pages[this.currentSelectionObj.pageNo].questions.splice(index, 0, elem);
      this.setFormData(this.form);
+     this.currentSelectionService.setSelectedObj({
+      pageNo: this.currentSelectionObj.pageNo,
+      questionIndex: index,
+      currSelection: "question"
+    })
+   }
+
+   deleteQuestion(pageNo: number, index: number){
+      this.form.pages[pageNo].questions.splice(index, 1);
+      this.form.totalQues--;
+      this.setFormData(this.form);
    }
 
    addPage(){
@@ -65,12 +77,12 @@ export class FormDataService {
      this.currentSelectionService.changePage(this.form.pages.length - 1);
    }
 
-   getFormElements(): Observable<DropDownOption[]> {
-     return this.formElements$.asObservable();
-   }
+  //  getFormElements(): Observable<DropDownOption[]> {
+  //    return this.formElements$.asObservable();
+  //  }
 
-   setFormElements(){
-    this.formElements$.next( this.formElements );
-   }
+  //  setFormElements(){
+  //   this.formElements$.next( this.formElements );
+  //  }
 
 }

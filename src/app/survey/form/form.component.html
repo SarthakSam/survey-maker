@@ -9,7 +9,7 @@
   <!-- <div formGroupName = "questions"> -->
       <div *ngFor = "let question of page.questions; let i = index" 
       class="question-container" 
-      (click) = "questionChanged(question.index)"
+      (click) = "questionChanged(i)"
       [ngClass] = "{'selected-ques': selectedQues == i}">
       <ul class="tool-bar">
           <li (click) = "deleteQuestion(i)"><i class="fas fa-times"></i></li>

@@ -22,7 +22,7 @@ export class FormInputsComponent implements OnInit {
   }
 
   inputClicked(event: FormField){
-    this.formDataService.addInput(event);
+    this.formDataService.addQuestion(event);
   }
 
 }

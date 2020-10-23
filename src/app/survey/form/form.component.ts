@@ -34,7 +34,7 @@ export class FormComponent implements OnInit, OnDestroy {
     }) );
     this.subscriptions.push( this.currentSelectionService.getSelectedObj().subscribe( (selectionState: SelectionState) => {
       this.pageNo = selectionState.pageNo;
-      this.selectedQues = selectionState.pageNo;
+      this.selectedQues = selectionState.questionIndex;
       this.createForm();
     }) );
   }
@@ -65,8 +65,7 @@ export class FormComponent implements OnInit, OnDestroy {
   }
 
   deleteQuestion(index: number){
-    this.page.questions.splice(index, 1);
-    this.formDataService.setFormData(this.formObj);
+    this.formDataService.deleteQuestion(this.pageNo, index);
   }
 
   isRequired(index: number){
@@ -83,7 +82,7 @@ export class FormComponent implements OnInit, OnDestroy {
     if(this.selectedQues != index){
       this.currentSelectionService.setSelectedObj({
         pageNo: this.pageNo,
-        questionNo: index,
+        questionIndex: index,
         currSelection: "question"
       })
     }
@@ -91,7 +90,6 @@ export class FormComponent implements OnInit, OnDestroy {
 
   propertyChanged(event, key: string){
     this.page[key] = event;
-    // this.formObj[key] = event;
     this.formDataService.setFormData(this.formObj);
   }
 

@@ -1,22 +1,28 @@
 form{
     background-color: white;
+    padding: 10px;
 }
 
 .question-container{
     /* border: 1px solid grey; */
-    margin: 10px;
+    /* margin: 10px; */
     padding: 10px
 }
 
-.question-container:nth-of-type(2){
-    border: 1px solid grey;
+.question-container:nth-of-type(even){
+    /* border: 1px solid grey; */
     background-color: #f4f4f4;
+}
+
+form :hover .tool-bar{
+    visibility: visible;
 }
 
 .tool-bar{
     display: flex;
+    visibility: hidden;
     list-style: none;
-    justify-content: flex-end
+    justify-content: flex-end;
 }
 
 .tool-bar li{
@@ -36,6 +42,7 @@ form{
     color: grey;
 }
 
-.{
-    border: 1px solid grey;
+.selected-ques{
+    border: 1px dotted #1ab394;
 }
+

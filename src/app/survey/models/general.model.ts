@@ -1,6 +1,6 @@
 export interface SelectionState{
     pageNo: number;
-    questionNo: number;
+    questionIndex: number;
     currSelection: string;
 }
 
