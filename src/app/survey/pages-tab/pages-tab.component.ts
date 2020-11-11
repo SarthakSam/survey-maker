@@ -36,7 +36,7 @@ export class PagesTabComponent implements OnInit {
     let pagesHTMLElem = document.querySelectorAll('.page');
     pagesHTMLElem.forEach( (page: HTMLElement) => {
       page.style.left = position + 'px';
-      position += page.getBoundingClientRect().width + 10;
+      position += page.getBoundingClientRect().width;
     })
   }
 

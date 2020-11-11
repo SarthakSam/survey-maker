@@ -12,6 +12,7 @@
       <ul class="carousel">
         <li class="page"  *ngFor = " let page of pagesList; let i = index" [ngClass] = "{ 'active': currentPage === i, 'carouselHead': carouselHead == i }"  (click) = "changePage(i)">
           {{ page.title }}
+          <i class="fas fa-cog"></i>
         </li>
       </ul>
   </div>
