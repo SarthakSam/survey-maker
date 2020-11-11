@@ -1,36 +1,37 @@
-header{
+nav {
     display: flex;
-    /* border: 1px solid black; */
-    background-color: rgb(169, 223, 220);;
 }
 
-select{
-    height: 35px;
-    width: 140px;
-    margin: auto 5px;
+.addBtn {
+    /* flex: 1; */
+    width: fit-content;
 }
 
-ul{
-    display: flex;
-    margin: 0;
+select {
+    flex: 1;
 }
 
-li{
+.carousel-container {
+    flex: 4;
+    /* background-color: green; */
+    overflow: hidden;
+}
+
+.carousel {
     list-style: none;
-    height: 40px;
-    /* border: 1px solid black; */
-    margin: 0 5px;
-    border: 1px solid cadetblue;
-    cursor: pointer;
-    color: cadetblue
+    position: relative;
+    width: 100%;
+    transition: transform 1000ms ease;
 }
 
-.list-page{
-    height: 30px;
-    margin: 8px 12px;
-    display: block;
+.page {
+    width: max-content;
+    display: inline-block;
+    position: absolute;
+    border: 1px solid black;
+    margin: 5px;
 }
 
-.active-page{
+.active {
     background-color: white;
 }

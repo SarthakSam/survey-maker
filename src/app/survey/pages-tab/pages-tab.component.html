@@ -1,5 +1,5 @@
-<header>
-  <select class="form-group" (change) = "pageSelected($event)" [value] = "currentPage">
+<nav>
+  <select class="form-control" (change) = "pageSelected($event)" [value] = "currentPage">
     <option *ngFor = "let page of pagesList; let i = index" [value]="i"> 
       {{ page.title }}
     </option> 
@@ -7,16 +7,15 @@
       Add New Page
     </option> 
   </select>
-  <ul>
-    <li *ngFor = " let page of pagesList; let i = index" [ngClass] = "{ 'active-page': currentPage === i }" (click) = "changePage(i)">
-      <span class="list-page">
-        {{ page.title }}
-      </span>
-    </li>
-    <li (click) = "addPage()">
-      <span class="list-page">
-        Add New Page
-      </span>
-    </li>
-  </ul>
-</header>
+  <button class="btn" (click) = "carouselLeft()"><i class="fas fa-chevron-left"></i></button>
+  <div class="carousel-container">
+      <ul class="carousel">
+        <li class="page"  *ngFor = " let page of pagesList; let i = index" [ngClass] = "{ 'active': currentPage === i, 'carouselHead': carouselHead == i }"  (click) = "changePage(i)">
+          {{ page.title }}
+        </li>
+      </ul>
+  </div>
+  <button class="btn"  (click) = "carouselRight()"><i class="fas fa-chevron-right"></i></button>
+  <button class="addBtn" (click) = "addPage()">Add New Page</button>
+ 
+</nav>
