@@ -10,8 +10,8 @@ import { TextareaQuestion } from './models/questionTypes/question-textarea';
 import { CheckboxQuestion } from './models/questionTypes/question-checkbox';
 import { RadioQuestion } from './models/questionTypes/question-radio';
 import { Page } from './models/page.model';
-import { DropDownOption } from './models/dropDownOptions.model';
 import { Question } from './models/question.model';
+import { NextKeyService } from './next-key.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,13 +21,15 @@ export class FormDataService {
   form: Form = null;
   form$: BehaviorSubject<Form> = new BehaviorSubject<Form>(null); 
   currentSelectionObj: SelectionState;
-  // formElements: DropDownOption[] = null;
-  // formElements$: BehaviorSubject<DropDownOption[]> = new BehaviorSubject<DropDownOption[]>(null);
+  nextPageIndexService: NextKeyService;
+  nextQuestionIndexService: NextKeyService;
 
   constructor(private currentSelectionService: CurrentSelectionService) {
     this.currentSelectionService.getSelectedObj().subscribe((obj: SelectionState) => {
       this.currentSelectionObj = obj;
     })
+    this.nextPageIndexService = new NextKeyService();
+    this.nextQuestionIndexService = new NextKeyService(); 
    }
 
    getFormData(): Observable<Form>{
@@ -39,20 +41,26 @@ export class FormDataService {
      this.form$.next( form );
    }
 
+   createNewForm() {
+    this.setFormData( new Form() );
+    this.addPage();
+   }
+
    addQuestion(input: FormField){
      this.form.totalQues++;
      const index = this.currentSelectionObj.currSelection !== 'page' ? this.currentSelectionObj.questionIndex + 1: this.form.pages[this.currentSelectionObj.pageNo].questions.length;
+     const key = this.nextQuestionIndexService.nextKey() + 1;
      let elem: Question;
      switch(input.controlType){
-      case 'textfield': elem = new TextBoxQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues, this.form.totalQues);
+      case 'textfield': elem = new TextBoxQuestion("Question" + key, "Question" + key, key);
                         break;
-      case 'dropdown': elem = new DropdownQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues, this.form.totalQues);
+      case 'dropdown': elem = new DropdownQuestion("Question" + key, "Question" + key, key);
                         break;
-      case 'checkbox': elem = new CheckboxQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues, this.form.totalQues);
+      case 'checkbox': elem = new CheckboxQuestion("Question" + key, "Question" + key, key);
                         break;
-      case 'textarea': elem = new TextareaQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues, this.form.totalQues);
+      case 'textarea': elem = new TextareaQuestion("Question" + key, "Question" + key, key);
                         break;
-      case 'radio':    elem = new RadioQuestion("Question" + this.form.totalQues, "Question" + this.form.totalQues, this.form.totalQues);
+      case 'radio':    elem = new RadioQuestion("Question" + key, "Question" + key, key);
                         break;                        
      }
      if(elem)
@@ -66,23 +74,17 @@ export class FormDataService {
    }
 
    deleteQuestion(pageNo: number, index: number){
-      this.form.pages[pageNo].questions.splice(index, 1);
+      const ques = this.form.pages[pageNo].questions.splice(index, 1)[0];
       this.form.totalQues--;
       this.setFormData(this.form);
+      this.nextQuestionIndexService.addKey(ques.index - 1);
    }
 
    addPage(){
-     this.form.pages.push( new Page("Page " + (this.form.pages.length + 1) ) );
+     const pageKey = this.nextPageIndexService.nextKey();
+     this.form.pages.push( new Page("Page " + (pageKey + 1) ) );
      this.setFormData(this.form);
      this.currentSelectionService.changePage(this.form.pages.length - 1);
    }
-
-  //  getFormElements(): Observable<DropDownOption[]> {
-  //    return this.formElements$.asObservable();
-  //  }
-
-  //  setFormElements(){
-  //   this.formElements$.next( this.formElements );
-  //  }
 
 }

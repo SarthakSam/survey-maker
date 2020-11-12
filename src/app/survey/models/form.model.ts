@@ -9,7 +9,7 @@ export class Form{
     constructor(){
         this.title = "";
         this.description = "";
-        this.pages = [new Page("Page 1")];
+        this.pages = [];
         this.totalQues = 0;
     }
 }
